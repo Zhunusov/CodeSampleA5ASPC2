@@ -1,0 +1,45 @@
+<mat-card class="container card children-width100">
+  <div class="text-center text-secondary">
+    <h3>Sing in <i class="material-icons icon-position">exit_to_app</i></h3>
+  </div>
+  <hr/>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-card-content class="children-width-100">
+
+      <div *ngIf="errors.length > 0" class="text-danger error-margin">
+        <ng-template ngFor let-error [ngForOf]="errors">
+          {{error}}
+          <br/>
+        </ng-template>
+        <br/>
+      </div>
+
+      <mat-form-field>
+        <input formControlName="userName" matInput placeholder="Username">
+        <mat-error *ngIf="form.controls['userName'].invalid && form.controls['userName'].touched">
+          Invalid UserName
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="password" formControlName="password" matInput placeholder="Password">
+        <mat-error *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+          Invalid Password
+        </mat-error>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <div class="text-center">
+      <button mat-raised-button color="primary">Sing In
+        <mat-icon class="text-light">send</mat-icon>
+      </button>
+      <br/>
+      <br/>
+      <p class="text-muted">Not a member?
+        <a [routerLink]="['/singup']">Sign Up</a>
+      </p>
+    </div>
+
+  </form>
+</mat-card>

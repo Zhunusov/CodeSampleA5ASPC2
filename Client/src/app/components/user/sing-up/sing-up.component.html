@@ -1,0 +1,57 @@
+<mat-card class="container card children-width100">
+  <div class="text-center text-secondary">
+    <h3>Sing up <i class="material-icons icon-position">person_add</i></h3>
+  </div>
+  <hr/>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-card-content class="children-width-100">
+
+      <div *ngIf="errors.length > 0" class="text-danger error-margin">
+        <ng-template ngFor let-error [ngForOf]="errors">
+          {{error}}
+          <br/>
+        </ng-template>
+        <br/>
+      </div>
+
+      <mat-form-field>
+        <input type="email" formControlName="username" matInput placeholder="Username">
+        <mat-error *ngIf="form.controls['username'].invalid && form.controls['username'].touched">
+          Invalid UserName
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="email" formControlName="email" matInput placeholder="Email">
+        <mat-error *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+          Invalid Email
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="password" validateEqual="confirmPassword" reverse="true" formControlName="password" matInput placeholder="Password">
+        <mat-error *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+          Invalid Password
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="password" validateEqual="password" formControlName="confirmPassword" matInput placeholder="Repeat password">
+        <mat-error *ngIf="form.controls['confirmPassword'].invalid && form.controls['confirmPassword'].touched">
+          Passwords do not match
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <div class="text-center">
+      <button mat-raised-button color="primary">Sing Up
+        <mat-icon class="text-light">send</mat-icon>
+      </button>
+      <br/>
+      <br/>
+      <p class="text-muted">Already have an account?
+        <a [routerLink]="['/singin']">Sing In</a>
+      </p>
+    </div>
+  </form>
+</mat-card>

@@ -1,0 +1,8 @@
+<button class="text-light" mat-button [matMenuTriggerFor]="menu">
+  <span>{{currentUser.userName}}</span>
+  <i class="material-icons">person</i>
+</button>
+<mat-menu #menu="matMenu">
+  <button [routerLink]="['/settings']" mat-menu-item>Settings</button>
+  <button (click)="logout()" mat-menu-item>Logout</button>
+</mat-menu>

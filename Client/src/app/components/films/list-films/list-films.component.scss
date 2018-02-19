@@ -1,0 +1,43 @@
+.example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+
+.film-container{
+    position: relative;
+    bottom: 45px;
+    margin-top: 45px;
+}
+
+.container{
+    min-width: 960px;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-table {
+    overflow: auto;
+    width: 100%;
+}
+
+img {
+    width: 200px;
+}
+
+.mat-cell {
+    padding: 10px;
+}
+.mat-row{
+    align-items: flex-start;
+}
+
+.mat-header-cell {
+    padding-left: 10px;
+}
+
+.mat-elevation-z8{
+    padding: 0;
+}

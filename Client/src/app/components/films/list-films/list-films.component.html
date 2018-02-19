@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <button [routerLink]="['/add-film']" mat-raised-button color="primary">Add film</button>
+  </div>
+  <div class="row">
+    <mat-form-field>
+      <input matInput [(ngModel)]="filter" (keyup)="applyFilter()" placeholder="Filter">
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="container film-container ">
+  <div class="row">
+    <div class="mat-elevation-z8">
+      <mat-table [dataSource]="dataSource">
+
+        <!-- <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container> -->
+
+        <ng-container matColumnDef="cover">
+          <mat-header-cell *matHeaderCellDef >Cover</mat-header-cell>
+          <mat-cell *matCellDef="let row" style="min-width:220px !important;">
+            <img src="{{row.coverUrl}}" />
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="director">
+          <mat-header-cell *matHeaderCellDef>Director</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.director}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="year">
+          <mat-header-cell *matHeaderCellDef style="max-width:70px !important;">Year</mat-header-cell>
+          <mat-cell *matCellDef="let row" style="max-width:70px !important;"> {{row.year}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+      <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = $event; onPageEvent();">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

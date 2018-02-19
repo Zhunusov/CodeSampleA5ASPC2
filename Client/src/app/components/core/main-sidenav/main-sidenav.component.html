@@ -1,0 +1,37 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="snav.toggle()" class="text-light">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <button [routerLink]="['/home']" class="text-light" mat-button>Angular 5 & ASP.NET Core 2
+        <!-- <mat-icon>home</mat-icon> -->
+      </button>
+      <div class="right">
+        <button *ngIf="!currentUser" [routerLink]="['/singin']" class="text-light" mat-button>Sing-in
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+        <span *ngIf="currentUser">
+          <app-user-menu></app-user-menu>
+        </span>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav [opened]="!mobileQuery.matches" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="false"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <a routerLinkActive="active" class="nav-item" mat-list-item [routerLink]="['/films']">Films</a>
+        <a routerLinkActive="active" class="nav-item" mat-list-item href="/swagger">Swagger</a>
+        <a routerLinkActive="active" class="nav-item" mat-list-item href="https://github.com/mirypoko/angular5aspnetcore2">Github</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <br>
+      <br>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

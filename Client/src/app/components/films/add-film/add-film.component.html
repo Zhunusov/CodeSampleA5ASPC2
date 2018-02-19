@@ -1,0 +1,67 @@
+<mat-card class="container card children-width100">
+  <div class="text-center text-secondary">
+    <h3>Add film
+      <i class="material-icons icon-position">add_circle</i>
+    </h3>
+  </div>
+  <hr/>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-card-content class="children-width-100">
+
+      <div *ngIf="errors.length > 0" class="text-danger error-margin">
+        <ng-template ngFor let-error [ngForOf]="errors">
+          {{error}}
+          <br/>
+        </ng-template>
+        <br/>
+      </div>
+
+      <mat-form-field>
+        <input type="text" formControlName="name" matInput placeholder="Name">
+        <mat-error *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+          Invalid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="coverUrl" matInput placeholder="Cover url">
+        <mat-error *ngIf="form.controls['coverUrl'].invalid && form.controls['coverUrl'].touched">
+          Invalid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea type="text" formControlName="description" matInput placeholder="Description"></textarea>
+        <mat-error *ngIf="form.controls['description'].invalid && form.controls['description'].touched">
+          Invalid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="director" matInput placeholder="Director">
+        <mat-error *ngIf="form.controls['director'].invalid && form.controls['director'].touched">
+          Invalid
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" formControlName="year" matInput placeholder="Year">
+        <mat-error *ngIf="form.controls['year'].invalid && form.controls['year'].touched">
+          Invalid
+        </mat-error>
+      </mat-form-field>
+
+      <div class="text-center">
+        <button mat-raised-button color="primary">Add
+          <mat-icon class="text-light">add_circle</mat-icon>
+        </button>
+        <br/>
+        <br/>
+        <p class="text-muted">To films list
+          <a [routerLink]="['/films']">list</a>
+        </p>
+      </div>
+
+    </mat-card-content>
+  </form>
+</mat-card>
