@@ -12,7 +12,7 @@ namespace Utils
         /// <summary>
         /// Get unix time now.
         /// </summary>
-        public static double UnixTimeNow => GetUnixTyime(DateTime.Now);
+        public static double UnixTimeNow => GetUnixTime(DateTime.Now);
 
         /// <summary>
         /// Convert unix time to DateTime.
@@ -30,7 +30,7 @@ namespace Utils
         /// </summary>
         /// <param name="date">DateTime to convert.</param>
         /// <returns>Unix time of date.</returns>
-        public static double GetUnixTyime(DateTime date)
+        public static double GetUnixTime(DateTime date)
         {
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             var diff = date - origin;
