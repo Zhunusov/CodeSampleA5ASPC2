@@ -8,13 +8,13 @@ using Utils;
 
 namespace Services.BaseServices
 {
-    public abstract class BaseBaseGenericDataService<TEntity> : IBaseGenericDataService<TEntity> where TEntity : class 
+    public abstract class BaseGenericDataService<TEntity> : IBaseGenericDataService<TEntity> where TEntity : class 
     {
         protected DbContext DbContext;
 
         public IQueryable<TEntity> Entities { get; }
 
-        protected BaseBaseGenericDataService(DbContext dbContext)
+        protected BaseGenericDataService(DbContext dbContext)
         {
             DbContext = dbContext;
             Entities = dbContext.Set<TEntity>().AsQueryable();
