@@ -5,7 +5,7 @@ using Domain;
 
 namespace FilmsService
 {
-    public class FilmsService : GenericDataService<Film>, IFilmsService
+    public class FilmsService : BaseBaseGenericDataService<Film>, IFilmsService
     {
         public FilmsService(ApplicationDbContext dbContext) : base(dbContext)
         {

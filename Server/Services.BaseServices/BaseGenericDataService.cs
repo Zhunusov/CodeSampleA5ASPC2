@@ -8,13 +8,13 @@ using Utils;
 
 namespace Services.BaseServices
 {
-    public abstract class GenericDataService<TEntity> : IGenericDataService<TEntity> where TEntity : class 
+    public abstract class BaseBaseGenericDataService<TEntity> : IBaseGenericDataService<TEntity> where TEntity : class 
     {
         protected DbContext DbContext;
 
         public IQueryable<TEntity> Entities { get; }
 
-        protected GenericDataService(DbContext dbContext)
+        protected BaseBaseGenericDataService(DbContext dbContext)
         {
             DbContext = dbContext;
             Entities = dbContext.Set<TEntity>().AsQueryable();
@@ -28,8 +28,15 @@ namespace Services.BaseServices
                 return new ServiceResult(false, errors);
             }
 
-            await DbContext.AddAsync(entity);
-            await DbContext.SaveChangesAsync();
+            try
+            {
+                await DbContext.AddAsync(entity);
+                await DbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResult(false, ex.Message);
+            }
 
             return new ServiceResult(true);
         }

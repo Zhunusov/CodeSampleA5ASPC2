@@ -7,7 +7,7 @@ namespace Servises.Interfaces.BaseServices
     /// <summary>
     /// Provides the APIs for managing entity in a persistence store.
     /// </summary>
-    public interface IGenericDataService<TEntity> where TEntity : class
+    public interface IBaseGenericDataService<TEntity> where TEntity : class
     {
         /// <summary>
         /// Returns an IQueryable of entities.
