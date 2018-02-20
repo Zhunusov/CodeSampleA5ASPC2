@@ -58,7 +58,7 @@ namespace Services.BaseServices
         public virtual async Task<ServiceResult> UpdateAsync(TEntity entity)
         {
             var errors = AttributeValidator.Validation(entity);
-            if (errors.Count > 0)
+            if (errors != null)
             {
                 return new ServiceResult(false, errors);
             }
