@@ -7,7 +7,7 @@ namespace Web.ViewModels.User
         [Required]
         [MinLength(4)]
         [RegularExpression("^[0-9]*[A-Za-z][A-Za-z0-9]*$")]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [EmailAddress]

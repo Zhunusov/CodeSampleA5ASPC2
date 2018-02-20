@@ -178,7 +178,7 @@
             <response code="200">Success.</response>
             <response code="400">Failed to get films. Error list in response body.</response>
         </member>
-        <member name="M:Web.Controllers.FilmsController.GetAsync(System.Int64)">
+        <member name="M:Web.Controllers.FilmsController.GetAsync(System.Int32)">
             <summary>
             Get film by id.
             </summary>
@@ -207,7 +207,7 @@
             <response code="401">User is not authorized.</response>
             <response code="403">You are not the administrator.</response>
         </member>
-        <member name="M:Web.Controllers.FilmsController.DeleteAsync(System.Int64)">
+        <member name="M:Web.Controllers.FilmsController.DeleteAsync(System.Int32)">
             <summary>
             Delete film.
             </summary>

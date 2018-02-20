@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Domain.Core.Base;
 
 namespace Domain
 {
-    public class Film
+    public class Film: BaseEntity<int>
     {
-        [Key]
-        public long Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 

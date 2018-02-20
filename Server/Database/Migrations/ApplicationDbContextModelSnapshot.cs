@@ -22,7 +22,7 @@ namespace Database.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Domain.Film", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CoverUrl")
@@ -40,6 +40,9 @@ namespace Database.EntityFrameworkCore.Migrations
                     b.Property<int>("Year");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Films");
                 });
@@ -147,7 +150,7 @@ namespace Database.EntityFrameworkCore.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("EventId");
+                    b.Property<long?>("EventId");
 
                     b.Property<int>("LogLevel");
 

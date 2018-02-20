@@ -52,7 +52,7 @@ namespace Database.EntityFrameworkCore.Migrations
                 name: "Films",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CoverUrl = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: false),
@@ -71,7 +71,7 @@ namespace Database.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    EventId = table.Column<int>(nullable: true),
+                    EventId = table.Column<long>(nullable: true),
                     LogLevel = table.Column<int>(nullable: false),
                     Message = table.Column<string>(nullable: false),
                     Time = table.Column<DateTime>(nullable: false)
@@ -246,6 +246,12 @@ namespace Database.EntityFrameworkCore.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Films_Name",
+                table: "Films",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_JwtResetTokens_ApplicationUserId",

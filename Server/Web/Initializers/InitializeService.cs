@@ -25,8 +25,7 @@ namespace Web.Initializers
 
         private static async Task RoleInitializeAsync(IRoleService roleService, string roleName)
         {
-            var roleNormalizedName = roleName.Trim().ToUpper();
-            var role = await roleService.Roles.FirstOrDefaultAsync(r => r.NormalizedName == roleNormalizedName);
+            var role = await roleService.GetByNameOrDafault(roleName);
             if (role == null)
             {
                 var result = await roleService.CreateAsync(roleName);
@@ -39,8 +38,7 @@ namespace Web.Initializers
 
         private static async Task AdminInitializeAsync(IUserService userService, AdminModel adminModel)
         {
-            var normalizedName = adminModel.UserName.Trim().ToUpper();
-            var defAdmin = await userService.Users.SingleOrDefaultAsync(u => u.UserName == normalizedName);
+            var defAdmin = await userService.GetByUserNameOrDefaultAsync(adminModel.UserName);
             if (defAdmin == null)
             {
                 defAdmin = new ApplicationUser
@@ -54,7 +52,7 @@ namespace Web.Initializers
                 {
                     throw new Exception(result.Errors.First());
                 }
-                defAdmin = await userService.Users.FirstAsync(u => u.NormalizedUserName == normalizedName);
+
                 result = await userService.AddToRoleAsync(defAdmin, "ADMIN");
                 if (!result.Succeeded)
                 {

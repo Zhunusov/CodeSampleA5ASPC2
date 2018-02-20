@@ -1,13 +1,13 @@
-﻿using Domain;
-using Servises.Interfaces.BaseServices;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Domain;
+using Domain.Core;
+using Servises.Interfaces.Base;
 
 namespace Servises.Interfaces
 {
-    /// <summary>
-    /// Provides the APIs for managing films in a persistence store.
-    /// </summary>
-    public interface IFilmsService : IBaseGenericDataService<Film>
+    public interface IFilmsService: IBaseGenericDataService<int, Film>
     {
-
+        Task<List<Film>> SearchAsync(int? count, int? offset, string searchString);
     }
 }

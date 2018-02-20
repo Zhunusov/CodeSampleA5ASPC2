@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Core;
@@ -8,6 +9,7 @@ using Domain.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Servises.Interfaces.AuthenticationServices;
+using Servises.Interfaces.Base;
 
 namespace AuthenticationServices
 {
@@ -17,13 +19,60 @@ namespace AuthenticationServices
 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public IQueryable<ApplicationUser> Users { get; }
+        private readonly IQueryable<ApplicationUser> _users;
 
         public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
-            Users = userManager.Users;
+            _users = userManager.Users;
+        }
+
+        public Task<int> CountAsync()
+        {
+            return _users.CountAsync();
+        }
+
+        public Task<ApplicationUser> GetByUserNameOrEmailOrDefaultAsync(string nameOrEmail)
+        {
+            var mormalized = nameOrEmail.Trim().ToUpper();
+
+            return _users.FirstOrDefaultAsync(
+                u => u.NormalizedUserName == mormalized ||
+                     u.NormalizedEmail == mormalized);
+        }
+
+        public Task<ApplicationUser> GetByUserNameOrDefaultAsync(string userName)
+        {
+            var normalizedUserName = userName.Trim().ToUpper();
+            return _users.FirstOrDefaultAsync(u => u.NormalizedUserName == normalizedUserName);
+        }
+
+        public Task<ApplicationUser> GetByEmailOrDefaultAsync(string email)
+        {
+            var normalizedEmail = email.Trim().ToUpper();
+            return _users.FirstOrDefaultAsync(u => u.NormalizedEmail == normalizedEmail);
+        }
+
+        public Task<ApplicationUser> GetByIdOrDefaultAsync(string id)
+        {
+            return _users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        public Task<List<ApplicationUser>> GetListAsync(int? count = null, int? offset = null)
+        {
+            var query = _users.Skip(offset.GetValueOrDefault());
+            if (count == null)
+            {
+                return query.ToListAsync();
+            }
+
+            return _users.Skip(offset.GetValueOrDefault()).Take(count.Value).ToListAsync();
+        }
+
+        public async Task<ServiceResult> CreateAsync(ApplicationUser user)
+        {
+            return (await _userManager.CreateAsync(user)).ToServiceResult();
         }
 
         public async Task<ServiceResult> AddToRoleAsync(ApplicationUser user, string role)
@@ -100,7 +149,8 @@ namespace AuthenticationServices
 
         public Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return Users.FirstOrDefaultAsync(u => u.UserName == _httpContextAccessor.HttpContext.User.Identity.Name);
+            return _users.FirstOrDefaultAsync(u => u.NormalizedUserName == "ADMIN");
+            return _users.FirstOrDefaultAsync(u => u.UserName == _httpContextAccessor.HttpContext.User.Identity.Name);
         }
     }
 }

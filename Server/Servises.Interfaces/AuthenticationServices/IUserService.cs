@@ -4,18 +4,38 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Core;
 using Domain.Identity;
+using Servises.Interfaces.Base;
 
 namespace Servises.Interfaces.AuthenticationServices
 {
     /// <summary>
     /// Provides the APIs for managing user in a persistence store.
     /// </summary>
-    public interface IUserService
+    public interface IUserService: IBaseGenericDataService<string, ApplicationUser>
     {
         /// <summary>
-        /// Returns an IQueryable of users.
+        /// Get user by user name or email.
         /// </summary>
-        IQueryable<ApplicationUser> Users { get; }
+        /// <param name="userNameOrEmail">User name or email.</param>
+        /// <returns>The System.Threading.Tasks.Task that represents the asynchronous operation, 
+        /// containing the Domain.Identity.ApplicationUser of the operation or null.</returns>
+        Task<ApplicationUser> GetByUserNameOrEmailOrDefaultAsync(string userNameOrEmail);
+
+        /// <summary>
+        /// Get user by user name.
+        /// </summary>
+        /// <param name="userName">User name.</param>
+        /// <returns>The System.Threading.Tasks.Task that represents the asynchronous operation, 
+        /// containing the Domain.Identity.ApplicationUser of the operation or null.</returns>
+        Task<ApplicationUser> GetByUserNameOrDefaultAsync(string userName);
+
+        /// <summary>
+        /// Get user by email.
+        /// </summary>
+        /// <param name="email">User email.</param>
+        /// <returns>The System.Threading.Tasks.Task that represents the asynchronous operation, 
+        /// containing the Domain.Identity.ApplicationUser of the operation or null.</returns>
+        Task<ApplicationUser> GetByEmailOrDefaultAsync(string email);
 
         /// <summary>
         /// Lock an user.
@@ -118,6 +138,15 @@ namespace Servises.Interfaces.AuthenticationServices
         /// <returns>The System.Threading.Tasks.Task that represents the asynchronous operation, 
         /// containing the Domain.Core.ServiceResult of the operation.</returns>
         Task<ServiceResult> CreateAsync(ApplicationUser user, string password);
+
+        /// <summary>
+        /// Creates the specified user in the backing store with no password, as an asynchronous
+        /// operation.
+        /// </summary>
+        /// <param name="user">The user to create</param>
+        /// <returns>The System.Threading.Tasks.Task that represents the asynchronous operation,
+        /// containing the Domain.Core.ServiceResult of the operation.</returns>
+        Task<ServiceResult> CreateAsync(ApplicationUser user);
 
         /// <summary>
         /// Updates the specified user in the backing store.

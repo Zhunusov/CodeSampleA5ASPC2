@@ -2,18 +2,22 @@
 using System.Threading.Tasks;
 using Domain.Core;
 using Domain.Identity;
+using Servises.Interfaces.Base;
 
 namespace Servises.Interfaces.AuthenticationServices
 {
     /// <summary>
     /// Provides the APIs for managing roles in a persistence store.
     /// </summary>
-    public interface IRoleService
+    public interface IRoleService: IBaseGenericDataService<string, UserRole>
     {
         /// <summary>
-        /// Gets an IQueryable of Roles.
+        /// Get user role by name.
         /// </summary>
-        IQueryable<UserRole> Roles { get; }
+        /// <param name="role">User role name.</param>
+        /// <returns>The System.Threading.Tasks.Task that represents the asynchronous operation, 
+        /// containing the Domain.Identity.UserRole of the operation or null.</returns>
+        Task<UserRole> GetByNameOrDafault(string role);
 
         /// <summary>
         /// Creates the specified role in the persistence store.

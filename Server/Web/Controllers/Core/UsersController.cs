@@ -21,7 +21,7 @@ namespace Web.Controllers.Core
     /// <summary>
     /// User API.
     /// </summary>
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class UsersController : Controller, IFullRestApiController<string, UserPostViewModel, UserPutViewModel>
     {
@@ -48,7 +48,7 @@ namespace Web.Controllers.Core
         [ProducesResponseType(typeof(int), 200)]
         public async Task<IActionResult> CountAsync()
         {
-            return Ok(await _userService.Users.CountAsync());
+            return Ok(await _userService.CountAsync());
         }
 
         /// <summary>
@@ -78,16 +78,7 @@ namespace Web.Controllers.Core
                 return BadRequest(errors);
             }
 
-            List<ApplicationUser> users;
-            if (count == null)
-            {
-                users = await _userService.Users.Skip(offset.GetValueOrDefault()).ToListAsync();
-            }
-            else
-            {
-                users = await _userService.Users.Skip(offset.GetValueOrDefault()).Take(count.Value).ToListAsync();
-            }
-
+            List<ApplicationUser> users = await _userService.GetListAsync(count, offset);
             var result = Mapper.Map<UserGetViewModel>(users);
             return Ok(result);
         }
@@ -110,7 +101,7 @@ namespace Web.Controllers.Core
                 return BadRequest(new List<string> { "Id cannot be empty" });
             }
 
-            var entity = await _userService.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var entity = await _userService.GetByIdOrDefaultAsync(id);
 
             if (entity == null)
             {
@@ -138,7 +129,7 @@ namespace Web.Controllers.Core
                 return BadRequest(new List<string> { "Id cannot be empty" });
             }
 
-            var user = await _userService.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _userService.GetByIdOrDefaultAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -217,7 +208,7 @@ namespace Web.Controllers.Core
 
             if (!currentPasswordCorrect)
             {
-                return BadRequest(new List<string>{"Current password is not correct."});
+                return BadRequest(new List<string> { "Current password is not correct." });
             }
 
             var result = await _userService.UpdateAsync(user);
@@ -247,10 +238,10 @@ namespace Web.Controllers.Core
         {
             if (string.IsNullOrEmpty(id))
             {
-                return BadRequest(new List<string> { "Id cannot be empty"});
+                return BadRequest(new List<string> { "Id cannot be empty" });
             }
 
-            var user = await _userService.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _userService.GetByIdOrDefaultAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -280,7 +271,8 @@ namespace Web.Controllers.Core
 
             if (result.Succeeded)
             {
-                return Created(Request.GetDisplayUrl() + "/" + user.Id, user);
+                var viewModel = Mapper.Map<UserGetViewModel>(user);
+                return Created(Request.GetDisplayUrl() + "/" + user.Id, viewModel);
             }
 
             return result.ToActionResult();
@@ -300,7 +292,8 @@ namespace Web.Controllers.Core
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.ErrorsToList());
 
-            var user = await _userService.Users.FirstOrDefaultAsync(u => u.Email == passwordResertViewModel.UserEmail);
+            var user = await _userService.GetByEmailOrDefaultAsync(passwordResertViewModel.UserEmail);
+
             if (user == null)
             {
                 return NotFound();
@@ -326,9 +319,8 @@ namespace Web.Controllers.Core
         [HttpGet("sendResetPasswordCode")]
         public async Task<IActionResult> SendResetPasswordCodeAsync(string email)
         {
-            var nirmalizedEmail = email.Trim().ToUpper();
+            var user = await _userService.GetByEmailOrDefaultAsync(email);
 
-            var user = await _userService.Users.FirstOrDefaultAsync(u => u.NormalizedEmail == nirmalizedEmail);
             if (user == null)
             {
                 return NotFound();
@@ -359,12 +351,24 @@ namespace Web.Controllers.Core
         [ProducesResponseType(typeof(List<string>), 400)]
         public async Task<IActionResult> ConfirmEmailAsync(string userId, string code)
         {
-            if (String.IsNullOrEmpty(userId) || String.IsNullOrEmpty(code))
+            var errors = new List<string>();
+
+            if (string.IsNullOrEmpty(userId))
             {
-                return BadRequest();
+                errors.Add("User id is required");
             }
 
-            var user = await _userService.Users.FirstAsync(u => u.Id == userId);
+            if (string.IsNullOrEmpty(code))
+            {
+                errors.Add("User id is required");
+            }
+
+            if (errors.Count > 0)
+            {
+                return BadRequest(errors);
+            }
+
+            var user = await _userService.GetByIdOrDefaultAsync(userId);
             if (user == null)
             {
                 return NotFound();
@@ -399,7 +403,7 @@ namespace Web.Controllers.Core
             }
 
             var code = await _userService.GenerateEmailConfirmationTokenAsync(user);
-       
+
             var callbackUrl = HttpContext.Request.Host +
                               $"ConfirmEmail?userId={user.Id}&code={code}";
 

@@ -247,3 +247,363 @@ Login failed for user 'DESKTOP-8RSDDO5\miryp'.
 ClientConnectionId:c7f1b594-b816-4057-b886-1101c00d8f50
 Error Number:4060,State:1,Class:11<---
 
+Error: An error occurred using the connection to database 'A5ASPC2DB' on server '(localdb)\MSSQLLocalDB'.
+Error: An exception occurred in the database while iterating the results of a query for context type 'Database.EntityFrameworkCore.ApplicationDbContext'.
+System.AggregateException: An error occurred while writing to logger(s). (Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.) ---> System.Data.SqlClient.SqlException: Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerMessage.<>c__DisplayClass6_0`2.<Define>b__0(ILogger logger, T1 arg1, T2 arg2, Exception exception)
+   at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`2.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam1 arg1, TParam2 arg2, Exception exception)
+   at Microsoft.EntityFrameworkCore.Internal.RelationalLoggerExtensions.ConnectionError(IDiagnosticsLogger`1 diagnostics, IRelationalConnection connection, Exception exception, DateTimeOffset startTime, TimeSpan duration, Boolean async, Boolean logErrorAsDebug)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.<OpenAsync>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<BufferlessMoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<MoveNext>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.<FirstOrDefault_>d__165`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.<MoveNext>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.<MoveNextCore>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.<MoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+---> (Inner Exception #0) System.Data.SqlClient.SqlException (0x80131904): Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+ClientConnectionId:f7ed4b18-4dbe-44f9-87c9-2351935ea257
+Error Number:4060,State:1,Class:11<---
+
+Error: An exception occurred in the database while iterating the results of a query for context type 'Database.EntityFrameworkCore.ApplicationDbContext'.
+System.AggregateException: An error occurred while writing to logger(s). (Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.) ---> System.Data.SqlClient.SqlException: Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerMessage.<>c__DisplayClass7_0`3.<Define>b__0(ILogger logger, T1 arg1, T2 arg2, T3 arg3, Exception exception)
+   at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`3.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam1 arg1, TParam2 arg2, TParam3 arg3, Exception exception)
+   at Microsoft.EntityFrameworkCore.Internal.CoreLoggerExtensions.QueryIterationFailed(IDiagnosticsLogger`1 diagnostics, Type contextType, Exception exception)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<ExecuteSingletonAsyncQuery>d__23`1.MoveNext()
+---> (Inner Exception #0) System.Data.SqlClient.SqlException (0x80131904): Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+ClientConnectionId:f7ed4b18-4dbe-44f9-87c9-2351935ea257
+Error Number:4060,State:1,Class:11<---
+
+Critical: Application startup exception
+Error: An error occurred using the connection to database 'A5ASPC2DB' on server '(localdb)\MSSQLLocalDB'.
+Error: An exception occurred in the database while iterating the results of a query for context type 'Database.EntityFrameworkCore.ApplicationDbContext'.
+System.AggregateException: An error occurred while writing to logger(s). (Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.) ---> System.Data.SqlClient.SqlException: Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerMessage.<>c__DisplayClass6_0`2.<Define>b__0(ILogger logger, T1 arg1, T2 arg2, Exception exception)
+   at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`2.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam1 arg1, TParam2 arg2, Exception exception)
+   at Microsoft.EntityFrameworkCore.Internal.RelationalLoggerExtensions.ConnectionError(IDiagnosticsLogger`1 diagnostics, IRelationalConnection connection, Exception exception, DateTimeOffset startTime, TimeSpan duration, Boolean async, Boolean logErrorAsDebug)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.<OpenAsync>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<BufferlessMoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<MoveNext>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.<FirstOrDefault_>d__165`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.<MoveNext>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.<MoveNextCore>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.<MoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+---> (Inner Exception #0) System.Data.SqlClient.SqlException (0x80131904): Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+ClientConnectionId:6771153b-53ee-4540-86ac-900667fe71eb
+Error Number:4060,State:1,Class:11<---
+
+Error: An exception occurred in the database while iterating the results of a query for context type 'Database.EntityFrameworkCore.ApplicationDbContext'.
+System.AggregateException: An error occurred while writing to logger(s). (Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.) ---> System.Data.SqlClient.SqlException: Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerMessage.<>c__DisplayClass7_0`3.<Define>b__0(ILogger logger, T1 arg1, T2 arg2, T3 arg3, Exception exception)
+   at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`3.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam1 arg1, TParam2 arg2, TParam3 arg3, Exception exception)
+   at Microsoft.EntityFrameworkCore.Internal.CoreLoggerExtensions.QueryIterationFailed(IDiagnosticsLogger`1 diagnostics, Type contextType, Exception exception)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<ExecuteSingletonAsyncQuery>d__23`1.MoveNext()
+---> (Inner Exception #0) System.Data.SqlClient.SqlException (0x80131904): Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+ClientConnectionId:6771153b-53ee-4540-86ac-900667fe71eb
+Error Number:4060,State:1,Class:11<---
+
+Error: An error occurred using the connection to database 'A5ASPC2DB' on server '(localdb)\MSSQLLocalDB'.
+Error: An exception occurred in the database while iterating the results of a query for context type 'Database.EntityFrameworkCore.ApplicationDbContext'.
+System.AggregateException: An error occurred while writing to logger(s). (Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.) ---> System.Data.SqlClient.SqlException: Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerMessage.<>c__DisplayClass6_0`2.<Define>b__0(ILogger logger, T1 arg1, T2 arg2, Exception exception)
+   at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`2.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam1 arg1, TParam2 arg2, Exception exception)
+   at Microsoft.EntityFrameworkCore.Internal.RelationalLoggerExtensions.ConnectionError(IDiagnosticsLogger`1 diagnostics, IRelationalConnection connection, Exception exception, DateTimeOffset startTime, TimeSpan duration, Boolean async, Boolean logErrorAsDebug)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.<OpenAsync>d__34.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<BufferlessMoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.SqlServerExecutionStrategy.<ExecuteAsync>d__7`2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.<MoveNext>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.<FirstOrDefault_>d__165`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.<MoveNext>d__3.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.<MoveNextCore>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.<MoveNext>d__10.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+---> (Inner Exception #0) System.Data.SqlClient.SqlException (0x80131904): Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+ClientConnectionId:80667d3c-4f5c-4d26-9682-84585aada371
+Error Number:4060,State:1,Class:11<---
+
+Error: An exception occurred in the database while iterating the results of a query for context type 'Database.EntityFrameworkCore.ApplicationDbContext'.
+System.AggregateException: An error occurred while writing to logger(s). (Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.) ---> System.Data.SqlClient.SqlException: Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+   at Microsoft.Extensions.Logging.LoggerMessage.<>c__DisplayClass7_0`3.<Define>b__0(ILogger logger, T1 arg1, T2 arg2, T3 arg3, Exception exception)
+   at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`3.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam1 arg1, TParam2 arg2, TParam3 arg3, Exception exception)
+   at Microsoft.EntityFrameworkCore.Internal.CoreLoggerExtensions.QueryIterationFailed(IDiagnosticsLogger`1 diagnostics, Type contextType, Exception exception)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.<MoveNext>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<ExecuteSingletonAsyncQuery>d__23`1.MoveNext()
+---> (Inner Exception #0) System.Data.SqlClient.SqlException (0x80131904): Cannot open database "A5ASPC2DB" requested by the login. The login failed.
+Login failed for user 'DPROTKO-PC\dprotko'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Web.Logging.DataBaseLogger.SqlHelper.ExecuteNonQuery(String commandStr, List`1 paramList) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 23
+   at Web.Logging.DataBaseLogger.SqlHelper.InsertLog(ServerEvent log) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\SqlHelper.cs:line 46
+   at Web.Logging.DataBaseLogger.DataBaseLogger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter) in C:\Users\dprotko\Documents\GitHub\CodeSampleA5ASPC2\Server\Web\Logging\DataBaseLogger\DataBaseLogger.cs:line 49
+   at Microsoft.Extensions.Logging.Logger.Log[TState](LogLevel logLevel, EventId eventId, TState state, Exception exception, Func`3 formatter)
+ClientConnectionId:80667d3c-4f5c-4d26-9682-84585aada371
+Error Number:4060,State:1,Class:11<---
+
+Critical: Application startup exception
+Warning: Query: '(from Film <generated>_2 in DbSet<Film> select [<generated>_2]).Skip(__p_0).Take(__p_1)' uses a row limiting operation (Skip/Take) without OrderBy which may lead to unpredictable results.

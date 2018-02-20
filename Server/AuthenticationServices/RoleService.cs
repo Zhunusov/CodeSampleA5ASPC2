@@ -1,37 +1,82 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Domain.Core;
 using Domain.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Servises.Interfaces.AuthenticationServices;
 
 namespace AuthenticationServices
 {
-    public class RoleService : IRoleService
+    public sealed class RoleService : IRoleService
     {
-        public IQueryable<UserRole> Roles { get; }
+        private readonly IQueryable<UserRole> _roles;
 
         private readonly RoleManager<UserRole> _roleManager;
 
         public RoleService(RoleManager<UserRole> roleManager)
         {
             _roleManager = roleManager;
-            Roles = roleManager.Roles;
+            _roles = roleManager.Roles;
         }
 
-        public async Task<ServiceResult> CreateAsync(string role)
+        public Task<int> CountAsync()
         {
-            return (await _roleManager.CreateAsync(new UserRole(role))).ToServiceResult();
+            return _roles.CountAsync();
         }
 
-        public async Task<ServiceResult> DeleteAsync(string role)
+        public Task<UserRole> GetByIdOrDefaultAsync(string id)
         {
-            return (await _roleManager.DeleteAsync(new UserRole(role))).ToServiceResult();
+            return _roles.FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task<ServiceResult> UpdateAsync(string role)
+        public Task<UserRole> GetByNameOrDafault(string role)
         {
-            return (await _roleManager.UpdateAsync(new UserRole(role))).ToServiceResult();
+            var normalized = role.Trim().ToUpper();
+            return _roles.FirstOrDefaultAsync(r => r.NormalizedName == normalized);
+        }
+
+        public Task<List<UserRole>> GetListAsync(int? count = null, int? offset = null)
+        {
+            var query = _roles.Skip(offset.GetValueOrDefault());
+
+            if (count == null)
+            {
+                return query.ToListAsync();
+            }
+
+            return query.Take(count.Value).ToListAsync();
+        }
+
+        public Task<ServiceResult> CreateAsync(string role)
+        {
+            return CreateAsync(new UserRole(role));
+        }
+
+        public async Task<ServiceResult> CreateAsync(UserRole role)
+        {
+            return (await _roleManager.CreateAsync(role)).ToServiceResult();
+        }
+
+        public Task<ServiceResult> DeleteAsync(string role)
+        {
+            return DeleteAsync(new UserRole(role));
+        }
+
+        public async Task<ServiceResult> DeleteAsync(UserRole role)
+        {
+            return (await _roleManager.DeleteAsync(role)).ToServiceResult();
+        }
+
+        public Task<ServiceResult> UpdateAsync(string role)
+        {
+            return UpdateAsync(new UserRole(role));
+        }
+
+        public async Task<ServiceResult> UpdateAsync(UserRole role)
+        {
+            return (await _roleManager.UpdateAsync(role)).ToServiceResult();
         }
     }
 }

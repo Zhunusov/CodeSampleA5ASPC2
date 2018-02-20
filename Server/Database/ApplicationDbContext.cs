@@ -19,9 +19,14 @@ namespace Database.EntityFrameworkCore
         {
         }
 
-        public IQueryable<TEntity> GetQurable<TEntity>() where TEntity: class
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            return Set<TEntity>().AsQueryable();
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder
+                .Entity<Film>()
+                .HasIndex(u => u.Name)
+                .IsUnique();
         }
     }
 }

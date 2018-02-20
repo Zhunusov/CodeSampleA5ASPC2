@@ -1,14 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Domain.Core.Base;
 
 namespace Domain.Logging
 {
-    public class ServerEvent
+    public class ServerEvent: BaseEntity<long>
     {
-        [Key]
-        public long Id { get; set; }
-
-        public int? EventId { get; set; }
+        public long? EventId { get; set; }
 
         public DateTime Time { get; set; }
 

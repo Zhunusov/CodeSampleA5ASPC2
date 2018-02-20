@@ -49,9 +49,7 @@ namespace Web.Controllers.Core
 
             var normalizedUserName = model.Username.Trim().ToUpper();
 
-            var user = await _userService.Users
-                .FirstOrDefaultAsync(u => u.NormalizedUserName == normalizedUserName ||
-                                          u.NormalizedEmail == normalizedUserName);
+            var user = await _userService.GetByUserNameOrEmailOrDefaultAsync(normalizedUserName);
 
             if (user == null)
             {

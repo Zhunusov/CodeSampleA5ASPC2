@@ -1,23 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Core;
 using Microsoft.EntityFrameworkCore;
-using Servises.Interfaces.BaseServices;
 using Utils;
 
 namespace Services.BaseServices
 {
-    public abstract class BaseGenericDataService<TEntity> : IBaseGenericDataService<TEntity> where TEntity : class 
+    public abstract class BaseGenericEfDataService<TEntity> where TEntity : class 
     {
         protected DbContext DbContext;
 
-        public IQueryable<TEntity> Entities { get; }
+        protected DbSet<TEntity> EntityDbSet { get; }
 
-        protected BaseGenericDataService(DbContext dbContext)
+        protected BaseGenericEfDataService(DbContext dbContext)
         {
             DbContext = dbContext;
-            Entities = dbContext.Set<TEntity>().AsQueryable();
+            EntityDbSet = dbContext.Set<TEntity>();
+        }
+
+        public virtual Task<int> CountAsync()
+        {
+            return EntityDbSet.CountAsync();
+        }
+
+        public virtual Task<List<TEntity>> GetListAsync(int? count = null, int? offset = null)
+        {
+            var query = EntityDbSet.Skip(offset.GetValueOrDefault());
+
+            if (count == null)
+            {
+                return query.ToListAsync();
+            }
+
+            return query.Take(count.Value).ToListAsync();
         }
 
         public virtual async Task<ServiceResult> CreateAsync(TEntity entity)
@@ -30,12 +47,12 @@ namespace Services.BaseServices
 
             try
             {
-                await DbContext.AddAsync(entity);
+                await EntityDbSet.AddAsync(entity);
                 await DbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                return new ServiceResult(false, ex.Message);
+                return new ServiceResult(false, "Database Error");
             }
 
             return new ServiceResult(true);
@@ -45,12 +62,12 @@ namespace Services.BaseServices
         {
             try
             {
-                DbContext.Remove(entity);
+                EntityDbSet.Remove(entity);
                 await DbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                return new ServiceResult(false, ex.Message);
+                return new ServiceResult(false, "Database Error");
             }
             return new ServiceResult(true);
         }
@@ -65,12 +82,12 @@ namespace Services.BaseServices
 
             try
             {
-                DbContext.Update(entity);
+                EntityDbSet.Update(entity);
                 await DbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                return new ServiceResult(false, ex.Message);
+                return new ServiceResult(false, "Database Error");
             }
 
             return new ServiceResult(true);

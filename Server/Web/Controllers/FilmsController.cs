@@ -6,7 +6,6 @@ using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Servises.Interfaces;
 using Web.Extensions;
 using Web.GuidelinesControllers;
@@ -16,10 +15,10 @@ namespace Web.Controllers
     /// <summary>
     /// Films API.
     /// </summary>
-    [Authorize(Roles = Roles.Admin)]
+    //[Authorize(Roles = Roles.Admin)]
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public sealed class FilmsController : Controller, IFullRestApiController<long, Film>
+    public sealed class FilmsController : Controller, IFullRestApiController<int, Film>
     {
         private readonly IFilmsService _dataService;
 
@@ -60,15 +59,7 @@ namespace Web.Controllers
                 return BadRequest(errors);
             }
 
-            if (count == null)
-            {
-                return Ok(await _dataService.Entities
-                    .Where(f => f.Name.Contains(searchString) || f.Description.Contains(searchString) || f.Director.Contains(searchString))
-                    .Skip(offset.GetValueOrDefault()).ToListAsync());
-            }
-            return Ok(await _dataService.Entities
-                .Where(f => f.Name.Contains(searchString) || f.Description.Contains(searchString) || f.Director.Contains(searchString))
-                .Skip(offset.GetValueOrDefault()).Take(count.Value).ToListAsync());
+            return Ok(await _dataService.SearchAsync(count, offset, searchString));
         }
 
         /// <summary>
@@ -80,7 +71,7 @@ namespace Web.Controllers
         [ProducesResponseType(typeof(int), 200)]
         public async Task<IActionResult> CountAsync()
         {
-            return Ok(await _dataService.Entities.CountAsync());
+            return Ok(await _dataService.CountAsync());
         }
 
         /// <summary>
@@ -110,11 +101,7 @@ namespace Web.Controllers
                 return BadRequest(errors);
             }
 
-            if (count == null)
-            {
-                return Ok(await _dataService.Entities.Skip(offset.GetValueOrDefault()).ToListAsync());
-            }
-            return Ok(await _dataService.Entities.Skip(offset.GetValueOrDefault()).Take(count.Value).ToListAsync());
+            return Ok(await _dataService.GetListAsync(count, offset));
         }
 
         /// <summary>
@@ -128,19 +115,20 @@ namespace Web.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Film), 200)]
         [ProducesResponseType(typeof(List<string>), 400)]
-        public async Task<IActionResult> GetAsync(long id)
+        public async Task<IActionResult> GetAsync(int id)
         {
             if (id < 1)
             {
-                return BadRequest(new List<string> {"Id can not be less than 1."});
+                return BadRequest(new List<string> { "Id can not be less than 1." });
             }
 
-            var entity = await _dataService.Entities.FirstOrDefaultAsync(u => u.Id == id);
+            var entity = await _dataService.GetByIdOrDefaultAsync(id);
 
             if (entity == null)
             {
                 return NotFound();
             }
+
             return Ok(entity);
         }
 
@@ -205,14 +193,14 @@ namespace Web.Controllers
         /// <response code="404">The film with the received id was not found.</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(string), 400)]
-        public async Task<IActionResult> DeleteAsync(long id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             if (id < 1)
             {
-                return BadRequest(new List<string> { "Id can not be less than 1"});
+                return BadRequest(new List<string> { "Id can not be less than 1" });
             }
 
-            var entity = await _dataService.Entities.FirstOrDefaultAsync(u => u.Id == id);
+            var entity = await _dataService.GetByIdOrDefaultAsync(id);
 
             if (entity == null)
             {
