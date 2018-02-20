@@ -7,12 +7,12 @@ namespace Web.GuidelinesControllers
     public interface IFullRestApiController<in TKey, in TPostEntity, in TPutEntity>
     {
         /// <summary>
-        /// Gel count of entities.
+        /// Get count of entities.
         /// </summary>
         Task<IActionResult> CountAsync();
 
         /// <summary>
-        /// Gel list of entities.
+        /// Get list of entities.
         /// </summary>
         /// <response code="200">Success.</response>
         /// <response code="400">Failed to get entities. Error list in response body.</response>
@@ -61,12 +61,12 @@ namespace Web.GuidelinesControllers
     public interface IFullRestApiController<in TKey, in TPostPutEntity>
     {
         /// <summary>
-        /// Gel count of entities.
+        /// Get count of entities.
         /// </summary>
         Task<IActionResult> CountAsync();
 
         /// <summary>
-        /// Gel list of entities.
+        /// Get list of entities.
         /// </summary>
         /// <response code="200">Success.</response>
         /// <response code="400">Failed to get entities. Error list in response body.</response>

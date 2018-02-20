@@ -72,7 +72,7 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Gel count of films.
+        /// Get count of films.
         /// </summary>
         /// <response code="200">Success.</response>
         [AllowAnonymous]
@@ -84,7 +84,7 @@ namespace Web.Controllers
         }
 
         /// <summary>
-        /// Gel list of films.
+        /// Get list of films.
         /// </summary>
         /// <response code="200">Success.</response>
         /// <response code="400">Failed to get films. Error list in response body.</response>

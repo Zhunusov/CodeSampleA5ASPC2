@@ -40,13 +40,13 @@
         </member>
         <member name="M:Web.Controllers.Core.UsersController.CountAsync">
             <summary>
-            Gel count of users.
+            Get count of users.
             </summary>
             <response code="200">Success.</response>
         </member>
         <member name="M:Web.Controllers.Core.UsersController.GetAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Gel list of users.
+            Get list of users.
             </summary>
             <response code="200">Success.</response>
             <response code="400">Failed to get users. Error list in response body.</response>
@@ -167,13 +167,13 @@
         </member>
         <member name="M:Web.Controllers.FilmsController.CountAsync">
             <summary>
-            Gel count of films.
+            Get count of films.
             </summary>
             <response code="200">Success.</response>
         </member>
         <member name="M:Web.Controllers.FilmsController.GetAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Gel list of films.
+            Get list of films.
             </summary>
             <response code="200">Success.</response>
             <response code="400">Failed to get films. Error list in response body.</response>
@@ -220,12 +220,12 @@
         </member>
         <member name="M:Web.GuidelinesControllers.IFullRestApiController`3.CountAsync">
             <summary>
-            Gel count of entities.
+            Get count of entities.
             </summary>
         </member>
         <member name="M:Web.GuidelinesControllers.IFullRestApiController`3.GetAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Gel list of entities.
+            Get list of entities.
             </summary>
             <response code="200">Success.</response>
             <response code="400">Failed to get entities. Error list in response body.</response>
@@ -266,12 +266,12 @@
         </member>
         <member name="M:Web.GuidelinesControllers.IFullRestApiController`2.CountAsync">
             <summary>
-            Gel count of entities.
+            Get count of entities.
             </summary>
         </member>
         <member name="M:Web.GuidelinesControllers.IFullRestApiController`2.GetAsync(System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
-            Gel list of entities.
+            Get list of entities.
             </summary>
             <response code="200">Success.</response>
             <response code="400">Failed to get entities. Error list in response body.</response>

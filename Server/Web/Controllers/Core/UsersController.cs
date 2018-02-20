@@ -40,7 +40,7 @@ namespace Web.Controllers.Core
         }
 
         /// <summary>
-        /// Gel count of users.
+        /// Get count of users.
         /// </summary>
         /// <response code="200">Success.</response>
         [AllowAnonymous]
@@ -52,7 +52,7 @@ namespace Web.Controllers.Core
         }
 
         /// <summary>
-        /// Gel list of users.
+        /// Get list of users.
         /// </summary>
         /// <response code="200">Success.</response>
         /// <response code="400">Failed to get users. Error list in response body.</response>
