@@ -25,7 +25,7 @@ namespace Utils.Hashers
             byte[] buffer2;
             if (input == null)
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(input));
             }
             using (var bytes = new Rfc2898DeriveBytes(input, SaltByteSize, HasingIterationsCount))
             {
@@ -57,7 +57,7 @@ namespace Utils.Hashers
 
             if (input == null)
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(input));
             }
 
             byte[] src = Convert.FromBase64String(hash);

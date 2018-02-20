@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Core;
 using Domain.Identity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Servises.Interfaces.AuthenticationServices;
 
 namespace AuthenticationServices
@@ -13,11 +15,14 @@ namespace AuthenticationServices
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
         public IQueryable<ApplicationUser> Users { get; }
 
-        public UserService(UserManager<ApplicationUser> userManager)
+        public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
             Users = userManager.Users;
         }
 
@@ -91,6 +96,11 @@ namespace AuthenticationServices
         public Task<bool> CheckPasswordAsync(ApplicationUser user, string password)
         {
             return _userManager.CheckPasswordAsync(user, password);
+        }
+
+        public Task<ApplicationUser> GetCurrentUserAsync()
+        {
+            return Users.FirstOrDefaultAsync(u => u.UserName == _httpContextAccessor.HttpContext.User.Identity.Name);
         }
     }
 }

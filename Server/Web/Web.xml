@@ -77,11 +77,11 @@
             <response code="401">User is not authorized.</response>
             <response code="404">User is not found.</response>
         </member>
-        <member name="M:Web.Controllers.Core.UsersController.PutPasswordAsync(Web.ViewModels.User.PutUserPasswordViewModel)">
+        <member name="M:Web.Controllers.Core.UsersController.PutPasswordAsync(Web.ViewModels.User.UserPasswordPutViewModel)">
             <summary>
             Chang password. In case of success, all user reset tokens will become invalid.
             </summary>
-            <param name="model"></param>
+            <param name="putPasswordViewModel"></param>
             <returns></returns>
             <response code="200">The user password was changed.</response>
             <response code="400">Failed to change password. Error list in response body.</response>
@@ -89,16 +89,14 @@
             <response code="403">Access denied. (Attempt to change someone else's account)</response>
             <response code="404">User is not found.</response>
         </member>
-        <member name="M:Web.Controllers.Core.UsersController.PutAsync(Web.ViewModels.User.PutUserViewModel)">
+        <member name="M:Web.Controllers.Core.UsersController.PutAsync(Web.ViewModels.User.UserPutViewModel)">
             <summary>
-            Chang user. If the user is not an administrator, then he can change only the current account.
+            Chang user.
             </summary>
-            <param name="model"></param>
+            <param name="putViewModel"></param>
             <response code="200">The user was changed.</response>
             <response code="400">Failed to change user. Error list in response body.</response>
             <response code="401">User is not authorized.</response>
-            <response code="403">Access denied. (Attempt to change someone else's account)</response>
-            <response code="404">User is not found.</response>
         </member>
         <member name="M:Web.Controllers.Core.UsersController.DeleteAsync(System.String)">
             <summary>
@@ -111,19 +109,19 @@
             <response code="403">You are not the administrator.</response>
             <response code="404">The user with the received id was not found.</response>
         </member>
-        <member name="M:Web.Controllers.Core.UsersController.PostAsync(Web.ViewModels.User.PostUserViewModel)">
+        <member name="M:Web.Controllers.Core.UsersController.PostAsync(Web.ViewModels.User.UserPostViewModel)">
             <summary>
             Create user.
             </summary>
-            <param name="model"></param>
+            <param name="postViewModel"></param>
             <response code="201">Success.</response>
             <response code="400">Failed to create user. Error list in response body.</response>
         </member>
-        <member name="M:Web.Controllers.Core.UsersController.ResetPasswordAsync(Web.ViewModels.User.ResertUserPasswordViewModel)">
+        <member name="M:Web.Controllers.Core.UsersController.ResetPasswordAsync(Web.ViewModels.User.UserPasswordResertViewModel)">
             <summary>
             Reset password. In case of success, all user reset tokens will become invalid.
             </summary>
-            <param name="model"></param>
+            <param name="passwordResertViewModel"></param>
             <response code="200">The user password was changed.</response>
             <response code="400">Failed to update password. Error list in response body.</response>
             <response code="404">The user with the received email was not found.</response>
@@ -193,7 +191,7 @@
             <summary>
             Chang film.
             </summary>
-            <param name="entity"></param>
+            <param name="putViewModel"></param>
             <response code="200">The film was changed.</response>
             <response code="400">Failed to change film. Error list in response body.</response>
             <response code="401">User is not authorized.</response>
@@ -203,7 +201,7 @@
             <summary>
             Create new film.
             </summary>
-            <param name="entity"></param>
+            <param name="postViewModel"></param>
             <response code="201">The film was created.</response>
             <response code="400">Failed to create film. Error list in response body.</response>
             <response code="401">User is not authorized.</response>
@@ -245,7 +243,7 @@
             <summary>
             Chang entity.
             </summary>
-            <param name="entity"></param>
+            <param name="putViewModel"></param>
             <response code="200">The entity was changed.</response>
             <response code="400">Failed to change entity. Error list in response body.</response>
         </member>
@@ -253,7 +251,7 @@
             <summary>
             Create entity.
             </summary>
-            <param name="entity"></param>
+            <param name="postViewModel"></param>
             <response code="201">The entity was created.</response>
             <response code="400">Failed to create entity. Error list in response body.</response>
         </member>
@@ -291,7 +289,7 @@
             <summary>
             Chang entity.
             </summary>
-            <param name="entity"></param>
+            <param name="putViewModel"></param>
             <response code="200">The entity was changed.</response>
             <response code="400">Failed to change entity. Error list in response body.</response>
         </member>
@@ -299,7 +297,7 @@
             <summary>
             Create entity.
             </summary>
-            <param name="entity"></param>
+            <param name="postViewModel"></param>
             <response code="201">The entity was created.</response>
             <response code="400">Failed to create entity. Error list in response body.</response>
         </member>

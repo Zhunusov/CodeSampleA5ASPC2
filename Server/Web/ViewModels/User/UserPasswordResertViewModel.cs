@@ -2,7 +2,7 @@
 
 namespace Web.ViewModels.User
 {
-    public class ResertUserPasswordViewModel
+    public class UserPasswordResertViewModel
     {
         [Required]
         public string UserEmail { get; set; }

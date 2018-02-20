@@ -32,20 +32,20 @@ namespace Web.GuidelinesControllers
         /// <summary>
         /// Chang entity.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="putViewModel"></param>
         /// <response code="200">The entity was changed.</response>
         /// <response code="400">Failed to change entity. Error list in response body.</response>
         [ProducesResponseType(typeof(List<string>), 400)]
-        Task<IActionResult> PutAsync([FromBody] TPutEntity entity);
+        Task<IActionResult> PutAsync([FromBody] TPutEntity putViewModel);
 
         /// <summary>
         /// Create entity.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="postViewModel"></param>
         /// <response code="201">The entity was created.</response>
         /// <response code="400">Failed to create entity. Error list in response body.</response>
         [ProducesResponseType(typeof(List<string>), 400)]
-        Task<IActionResult> PostAsync([FromBody] TPostEntity entity);
+        Task<IActionResult> PostAsync([FromBody] TPostEntity postViewModel);
 
         /// <summary>
         /// Delete entity.
@@ -86,20 +86,20 @@ namespace Web.GuidelinesControllers
         /// <summary>
         /// Chang entity.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="putViewModel"></param>
         /// <response code="200">The entity was changed.</response>
         /// <response code="400">Failed to change entity. Error list in response body.</response>
         [ProducesResponseType(typeof(List<string>), 400)]
-        Task<IActionResult> PutAsync([FromBody] TPostPutEntity entity);
+        Task<IActionResult> PutAsync([FromBody] TPostPutEntity putViewModel);
 
         /// <summary>
         /// Create entity.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="postViewModel"></param>
         /// <response code="201">The entity was created.</response>
         /// <response code="400">Failed to create entity. Error list in response body.</response>
         [ProducesResponseType(typeof(List<string>), 400)]
-        Task<IActionResult> PostAsync([FromBody] TPostPutEntity entity);
+        Task<IActionResult> PostAsync([FromBody] TPostPutEntity postViewModel);
 
         /// <summary>
         /// Delete entity.

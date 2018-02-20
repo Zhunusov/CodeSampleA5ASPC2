@@ -1,6 +1,6 @@
 ﻿namespace Web.ViewModels.User
 {
-    public class GetUserViewModel
+    public class UserGetViewModel
     {
         public string Id { get; set; }
 

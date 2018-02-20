@@ -147,7 +147,7 @@ namespace Web.Controllers
         /// <summary>
         /// Chang film.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="putViewModel"></param>
         /// <response code="200">The film was changed.</response>
         /// <response code="400">Failed to change film. Error list in response body.</response>
         /// <response code="401">User is not authorized.</response>
@@ -155,15 +155,15 @@ namespace Web.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(Film), 200)]
         [ProducesResponseType(typeof(List<string>), 400)]
-        public async Task<IActionResult> PutAsync([FromBody] Film entity)
+        public async Task<IActionResult> PutAsync([FromBody] Film putViewModel)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.ErrorsToList());
 
-            var result = await _dataService.UpdateAsync(entity);
+            var result = await _dataService.UpdateAsync(putViewModel);
 
             if (result.Succeeded)
             {
-                return Ok(entity);
+                return Ok(putViewModel);
             }
 
             return result.ToActionResult();
@@ -172,7 +172,7 @@ namespace Web.Controllers
         /// <summary>
         /// Create new film.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="postViewModel"></param>
         /// <response code="201">The film was created.</response>
         /// <response code="400">Failed to create film. Error list in response body.</response>
         /// <response code="401">User is not authorized.</response>
@@ -180,15 +180,15 @@ namespace Web.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(Film), 201)]
         [ProducesResponseType(typeof(List<string>), 400)]
-        public async Task<IActionResult> PostAsync([FromBody] Film entity)
+        public async Task<IActionResult> PostAsync([FromBody] Film postViewModel)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.ErrorsToList());
 
-            var result = await _dataService.CreateAsync(entity);
+            var result = await _dataService.CreateAsync(postViewModel);
 
             if (result.Succeeded)
             {
-                return new CreatedResult(Request.GetDisplayUrl() + $"/{entity.Id}", entity);
+                return new CreatedResult(Request.GetDisplayUrl() + $"/{postViewModel.Id}", postViewModel);
             }
 
             return result.ToActionResult();

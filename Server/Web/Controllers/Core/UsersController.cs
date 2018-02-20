@@ -23,7 +23,7 @@ namespace Web.Controllers.Core
     /// </summary>
     [Authorize]
     [Route("api/[controller]")]
-    public class UsersController : Controller, IFullRestApiController<string, PostUserViewModel, PutUserViewModel>
+    public class UsersController : Controller, IFullRestApiController<string, UserPostViewModel, UserPutViewModel>
     {
         private readonly IUserService _userService;
 
@@ -58,7 +58,7 @@ namespace Web.Controllers.Core
         /// <response code="400">Failed to get users. Error list in response body.</response>
         [AllowAnonymous]
         [HttpGet]
-        [ProducesResponseType(typeof(List<GetUserViewModel>), 200)]
+        [ProducesResponseType(typeof(List<UserGetViewModel>), 200)]
         [ProducesResponseType(typeof(List<string>), 400)]
         public async Task<IActionResult> GetAsync(int? count, int? offset = 0)
         {
@@ -88,7 +88,7 @@ namespace Web.Controllers.Core
                 users = await _userService.Users.Skip(offset.GetValueOrDefault()).Take(count.Value).ToListAsync();
             }
 
-            var result = Mapper.Map<GetUserViewModel>(users);
+            var result = Mapper.Map<UserGetViewModel>(users);
             return Ok(result);
         }
 
@@ -116,7 +116,7 @@ namespace Web.Controllers.Core
             {
                 return NotFound();
             }
-            return Ok(Mapper.Map<GetUserViewModel>(entity));
+            return Ok(Mapper.Map<UserGetViewModel>(entity));
         }
 
 
@@ -154,23 +154,23 @@ namespace Web.Controllers.Core
         /// <response code="401">User is not authorized.</response>
         /// <response code="404">User is not found.</response>
         [HttpGet("current")]
-        [ProducesResponseType(typeof(GetUserViewModel), 200)]
+        [ProducesResponseType(typeof(UserGetViewModel), 200)]
         public async Task<IActionResult> CurrentAsync()
         {
-            var user = await GetCurrentUserAsync();
+            var user = await _userService.GetCurrentUserAsync();
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(Mapper.Map<GetUserViewModel>(user));
+            return Ok(Mapper.Map<UserGetViewModel>(user));
         }
 
         /// <summary>
         /// Chang password. In case of success, all user reset tokens will become invalid.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="putPasswordViewModel"></param>
         /// <returns></returns>
         /// <response code="200">The user password was changed.</response>
         /// <response code="400">Failed to change password. Error list in response body.</response>
@@ -179,13 +179,13 @@ namespace Web.Controllers.Core
         /// <response code="404">User is not found.</response>
         [HttpPut("password")]
         [ProducesResponseType(typeof(List<string>), 400)]
-        public async Task<IActionResult> PutPasswordAsync([FromBody]PutUserPasswordViewModel model)
+        public async Task<IActionResult> PutPasswordAsync([FromBody]UserPasswordPutViewModel putPasswordViewModel)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.ErrorsToList());
 
-            var user = await GetCurrentUserAsync();
+            var user = await _userService.GetCurrentUserAsync();
 
-            var result = await _userService.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+            var result = await _userService.ChangePasswordAsync(user, putPasswordViewModel.CurrentPassword, putPasswordViewModel.NewPassword);
 
             if (result.Succeeded)
             {
@@ -196,48 +196,35 @@ namespace Web.Controllers.Core
         }
 
         /// <summary>
-        /// Chang user. If the user is not an administrator, then he can change only the current account.
+        /// Chang user.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="putViewModel"></param>
         /// <response code="200">The user was changed.</response>
         /// <response code="400">Failed to change user. Error list in response body.</response>
         /// <response code="401">User is not authorized.</response>
-        /// <response code="403">Access denied. (Attempt to change someone else's account)</response>
-        /// <response code="404">User is not found.</response>
         [HttpPut]
-        [ProducesResponseType(typeof(GetUserViewModel), 200)]
+        [ProducesResponseType(typeof(UserGetViewModel), 200)]
         [ProducesResponseType(typeof(List<string>), 400)]
-        public async Task<IActionResult> PutAsync([FromBody]PutUserViewModel model)
+        public async Task<IActionResult> PutAsync([FromBody]UserPutViewModel putViewModel)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.ErrorsToList());
 
-            var user = await GetCurrentUserAsync();
-            if (user.Id != model.Id)
-            {
-                return StatusCode(403);
-            }
+            var user = await _userService.GetCurrentUserAsync();
 
-            user = await _userService.Users.FirstOrDefaultAsync(u => u.Id == model.Id);
+            Mapper.CopyProperties(putViewModel, user);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            Mapper.CopyProperties(model, user);
-
-            var currentPasswordCorrect = await _userService.CheckPasswordAsync(user, model.CurrentPassword);
+            var currentPasswordCorrect = await _userService.CheckPasswordAsync(user, putViewModel.CurrentPassword);
 
             if (!currentPasswordCorrect)
             {
-                return BadRequest(new List<string>{"Current password is not correct"});
+                return BadRequest(new List<string>{"Current password is not correct."});
             }
 
             var result = await _userService.UpdateAsync(user);
 
             if (result.Succeeded)
             {
-                var viewModel = Mapper.Map<GetUserViewModel>(user);
+                var viewModel = Mapper.Map<UserGetViewModel>(user);
                 return Ok(viewModel);
             }
 
@@ -276,24 +263,20 @@ namespace Web.Controllers.Core
         /// <summary>
         /// Create user.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="postViewModel"></param>
         /// <response code="201">Success.</response>
         /// <response code="400">Failed to create user. Error list in response body.</response>
         [AllowAnonymous]
         [HttpPost]
-        [ProducesResponseType(typeof(GetUserViewModel), 201)]
+        [ProducesResponseType(typeof(UserGetViewModel), 201)]
         [ProducesResponseType(typeof(List<string>), 400)]
-        public async Task<IActionResult> PostAsync([FromBody]PostUserViewModel model)
+        public async Task<IActionResult> PostAsync([FromBody]UserPostViewModel postViewModel)
         {
             if (!ModelState.IsValid) return new BadRequestObjectResult(ModelState.ErrorsToList());
 
-            var user = new ApplicationUser
-            {
-                Email = model.Email,
-                UserName = model.Username
-            };
+            var user = Mapper.Map<ApplicationUser>(postViewModel);
 
-            var result = await _userService.CreateAsync(user, model.Password);
+            var result = await _userService.CreateAsync(user, postViewModel.Password);
 
             if (result.Succeeded)
             {
@@ -306,24 +289,24 @@ namespace Web.Controllers.Core
         /// <summary>
         /// Reset password. In case of success, all user reset tokens will become invalid.
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="passwordResertViewModel"></param>
         /// <response code="200">The user password was changed.</response>
         /// <response code="400">Failed to update password. Error list in response body.</response>
         /// <response code="404">The user with the received email was not found.</response>
         [AllowAnonymous]
         [HttpPut("resetPassword")]
         [ProducesResponseType(typeof(List<string>), 400)]
-        public async Task<IActionResult> ResetPasswordAsync([FromBody] ResertUserPasswordViewModel model)
+        public async Task<IActionResult> ResetPasswordAsync([FromBody] UserPasswordResertViewModel passwordResertViewModel)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.ErrorsToList());
 
-            var user = await _userService.Users.FirstOrDefaultAsync(u => u.Email == model.UserEmail);
+            var user = await _userService.Users.FirstOrDefaultAsync(u => u.Email == passwordResertViewModel.UserEmail);
             if (user == null)
             {
                 return NotFound();
             }
 
-            var result = await _userService.ResetPasswordAsync(user, model.Code, model.Password);
+            var result = await _userService.ResetPasswordAsync(user, passwordResertViewModel.Code, passwordResertViewModel.Password);
 
             if (result.Succeeded)
             {
@@ -405,7 +388,7 @@ namespace Web.Controllers.Core
         [HttpGet("sendConfirmEmailCode")]
         public async Task<IActionResult> SendConfirmEmailCodeAsync()
         {
-            var user = await GetCurrentUserAsync();
+            var user = await _userService.GetCurrentUserAsync();
             if (user == null)
             {
                 return NotFound();
@@ -425,11 +408,6 @@ namespace Web.Controllers.Core
                 $"Confirm email by clicking on the link: <a href='{callbackUrl}'>link</a>");
 
             return Ok();
-        }
-
-        private Task<ApplicationUser> GetCurrentUserAsync()
-        {
-            return _userService.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
         }
     }
 }

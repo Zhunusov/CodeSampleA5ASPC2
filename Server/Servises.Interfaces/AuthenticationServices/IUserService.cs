@@ -144,5 +144,11 @@ namespace Servises.Interfaces.AuthenticationServices
         /// otherwise false.</param>
         /// <returns></returns>
         Task<bool> CheckPasswordAsync(ApplicationUser user, string password);
+
+        /// <summary>
+        /// Returns a current user.
+        /// </summary>
+        /// <returns>A current user or null.</returns>
+        Task<ApplicationUser> GetCurrentUserAsync();
     }
 }
